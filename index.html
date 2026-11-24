@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KisanSetu · Farmer to Consumer Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+    body { background: #f5f9f5; color: #1a2e1a; line-height: 1.5; }
+    :root {
+      --green-dark: #1e4a2b; --green-medium: #2e7d32; --green-light: #e6f3e6;
+      --shadow: 0 8px 24px rgba(0,30,0,0.08); --radius: 20px; --radius-sm: 12px;
+    }
+    .container { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+
+    /* HEADER */
+    .header { background: #fff; padding: 14px 0; box-shadow: 0 2px 12px rgba(0,0,0,0.03); position: sticky; top: 0; z-index: 50; }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .logo-area { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+    .emblem { background: var(--green-dark); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; }
+    .project-title { font-size: 0.9rem; font-weight: 600; color: var(--green-dark); line-height: 1.2; }
+    .project-title small { display: block; font-weight: 400; font-size: 0.7rem; color: #2d5a2d; opacity: 0.8; }
+    .nav { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .nav a { text-decoration: none; color: #1f3a1f; font-weight: 500; font-size: 0.95rem; }
+    .nav a:hover { color: var(--green-medium); }
+    .auth-buttons { display: flex; gap: 10px; }
+
+    .btn { padding: 8px 20px; border-radius: 40px; border: none; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: 0.2s; background: var(--green-light); color: var(--green-dark); }
+    .btn-primary { background: var(--green-medium); color: #fff; }
+    .btn-primary:hover { background: #1e5a2a; }
+    .btn-outline { background: transparent; border: 1.5px solid var(--green-medium); color: var(--green-medium); }
+    .btn-outline:hover { background: var(--green-medium); color: #fff; }
+    .btn-block { width: 100%; }
+    .btn-small { padding: 5px 14px; font-size: 0.8rem; }
+    .btn-danger { background: #dc3545; color: #fff; }
+
+    /* HERO */
+    .hero { background: linear-gradient(135deg, #eaf7ea, #d4e8d4); border-radius: var(--radius); padding: 50px 40px; margin: 30px 0 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 30px; box-shadow: var(--shadow); }
+    .hero-text h1 { font-size: 2.4rem; font-weight: 700; color: #0f2b0f; max-width: 600px; }
+    .hero-text p { font-size: 1.1rem; color: #1e3d1e; margin: 12px 0 20px; }
+    .search-box { display: flex; background: #fff; border-radius: 60px; padding: 6px 6px 6px 20px; max-width: 500px; box-shadow: 0 4px 12px rgba(0,30,0,0.06); }
+    .search-box input { border: none; padding: 12px 0; flex: 1; font-size: 1rem; outline: none; background: transparent; }
+    .search-box button { background: var(--green-medium); border: none; padding: 12px 28px; border-radius: 40px; color: #fff; font-weight: 600; cursor: pointer; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 18px; margin: 30px 0 10px; }
+    .feature-card { background: #fff; padding: 16px 12px; border-radius: var(--radius-sm); text-align: center; border: 1px solid #e2f0e2; }
+    .feature-card i { font-size: 1.8rem; color: var(--green-medium); margin-bottom: 6px; }
+    .feature-card h4 { font-size: 0.95rem; color: #0f2b0f; }
+
+    /* SECTIONS */
+    .section-title { font-size: 1.8rem; font-weight: 700; color: #0f2b0f; margin: 40px 0 16px; }
+    .section-sub { color: #2d5a2d; max-width: 700px; }
+    .problem-solution { display: flex; flex-wrap: wrap; gap: 30px; background: #fff; border-radius: var(--radius); padding: 30px; box-shadow: var(--shadow); margin: 20px 0 30px; }
+    .chain-box { flex: 1; min-width: 200px; }
+    .chain-box h3 { font-size: 1.2rem; margin-bottom: 12px; color: var(--green-dark); }
+    .chain { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; background: #f2faf2; padding: 14px 16px; border-radius: 40px; }
+    .chain span { background: #fff; padding: 6px 14px; border-radius: 30px; font-size: 0.85rem; }
+    .chain i { color: var(--green-medium); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; margin: 20px 0 40px; }
+    .step { background: #fff; padding: 24px 16px; border-radius: var(--radius-sm); text-align: center; box-shadow: var(--shadow); border-top: 4px solid var(--green-medium); }
+    .step .num { background: var(--green-dark); color: #fff; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: 700; }
+
+    /* PRODUCTS */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 20px; margin: 20px 0 30px; }
+    .product-card { background: #fff; border-radius: var(--radius-sm); padding: 16px 12px; box-shadow: var(--shadow); border: 1px solid #eaf3ea; display: flex; flex-direction: column; }
+    .product-card:hover { transform: translateY(-4px); transition: 0.2s; }
+    .product-img { width: 100%; height: 110px; border-radius: 12px; background: #d4e8d4; display: flex; align-items: center; justify-content: center; font-size: 3rem; }
+    .product-card h4 { margin: 10px 0 2px; }
+    .product-card .price { color: var(--green-medium); font-weight: 700; }
+    .product-card .farmer { font-size: 0.78rem; color: #2d5a2d; }
+    .product-card .stock { font-size: 0.78rem; color: #6b7d6b; margin-bottom: 8px; }
+    .product-card button { background: var(--green-medium); border: none; color: #fff; padding: 8px; border-radius: 30px; font-weight: 600; margin-top: auto; cursor: pointer; }
+    .product-card button:hover { background: #1e5a2a; }
+    .product-card button:disabled { background: #b0bec5; cursor: not-allowed; }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; background: #fff; border-radius: var(--radius-sm); padding: 12px 0; box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e8f0e8; }
+    th { background: #eaf3ea; color: #0f2b0f; }
+    .badge { padding: 4px 12px; border-radius: 30px; font-size: 0.75rem; font-weight: 600; display: inline-block; background: var(--green-light); }
+    .badge-success { background: #c8e6c9; color: #1e4a2b; }
+    .badge-warning { background: #fff3cd; color: #856404; }
+    .dash-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 16px; margin: 16px 0; }
+    .dash-card { background: #fff; padding: 18px 12px; border-radius: var(--radius-sm); box-shadow: var(--shadow); border-left: 6px solid var(--green-medium); }
+
+    .admin-panel { display: flex; flex-wrap: wrap; gap: 24px; background: #fff; border-radius: var(--radius); padding: 20px; margin: 30px 0; box-shadow: var(--shadow); }
+    .admin-sidebar { min-width: 180px; background: #f2faf2; border-radius: var(--radius-sm); padding: 16px 12px; }
+    .admin-sidebar a { display: block; padding: 10px 12px; border-radius: 30px; color: #1f3a1f; text-decoration: none; font-weight: 500; }
+    .admin-sidebar a:hover { background: var(--green-light); }
+    .admin-content { flex: 1; }
+
+    .extra-features { display: flex; flex-wrap: wrap; gap: 16px; margin: 20px 0; }
+    .extra-badge { background: #fff; padding: 10px 20px; border-radius: 40px; border: 1px solid #dce8dc; display: inline-flex; align-items: center; gap: 8px; }
+
+    /* MODALS */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.45); z-index: 200; align-items: center; justify-content: center; padding: 20px; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: #fff; border-radius: var(--radius); padding: 28px; max-width: 600px; width: 100%; max-height: 88vh; overflow-y: auto; box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
+    .modal h3 { margin-bottom: 16px; color: var(--green-dark); }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 6px; color: #1f3a1f; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 10px 14px; border: 1.5px solid #dce8dc; border-radius: 12px; font-size: 0.95rem; outline: none; background: #fafdfa; font-family: 'Inter', sans-serif; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--green-medium); }
+    .form-switch { text-align: center; margin-top: 14px; font-size: 0.9rem; color: #2d5a2d; }
+    .form-switch a { color: var(--green-medium); font-weight: 600; cursor: pointer; text-decoration: underline; }
+    .error-msg { color: #dc3545; font-size: 0.85rem; margin: 6px 0; display: none; }
+    .error-msg.show { display: block; }
+
+    .cart-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #e8f0e8; gap: 12px; }
+    .cart-item-info { flex: 1; }
+    .cart-item-qty { display: flex; align-items: center; gap: 8px; }
+    .cart-item-qty button { width: 28px; height: 28px; border-radius: 50%; border: 1px solid #c8e6c9; background: #fff; cursor: pointer; font-weight: 700; color: var(--green-dark); }
+    .cart-item-qty span { min-width: 22px; text-align: center; font-weight: 600; }
+    .cart-total { font-size: 1.2rem; font-weight: 700; color: var(--green-dark); margin: 16px 0; text-align: right; }
+    .modal-actions { display: flex; gap: 12px; justify-content: flex-end; flex-wrap: wrap; }
+
+    /* TOAST */
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--green-dark); color: #fff; padding: 14px 28px; border-radius: 40px; font-weight: 500; box-shadow: 0 8px 24px rgba(0,0,0,0.2); opacity: 0; transition: 0.35s; z-index: 300; pointer-events: none; max-width: 90vw; text-align: center; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* USER BADGE */
+    .user-badge { display: none; align-items: center; gap: 8px; background: var(--green-light); padding: 6px 14px 6px 8px; border-radius: 40px; font-weight: 600; font-size: 0.85rem; color: var(--green-dark); cursor: pointer; }
+    .user-badge .avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--green-medium); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; }
+    .user-badge .cart-pill { background: var(--green-medium); color: #fff; border-radius: 50%; width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+    .hidden { display: none !important; }
+
+    .footer { background: #0f2b0f; color: #d4e8d4; padding: 30px 0; margin-top: 40px; border-radius: var(--radius) var(--radius) 0 0; }
+    .footer a { color: #b3d9b3; text-decoration: none; margin: 0 12px 0 0; }
+    .footer-links { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+    @media (max-width: 700px) {
+      .header-inner { flex-direction: column; align-items: stretch; }
+      .nav { justify-content: center; }
+      .hero { padding: 30px 20px; }
+      .hero-text h1 { font-size: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="container header-inner">
+    <div class="logo-area" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+      <div class="emblem"><i class="fas fa-leaf"></i></div>
+      <div class="project-title">KISANSETU<small>“Reducing Intermediaries. Empowering Farmers.”</small></div>
+    </div>
+    <div class="nav">
+      <a href="#home">Home</a>
+      <a href="#marketplace">Products</a>
+      <a href="#how-it-works">How It Works</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+
+      <!-- Logged OUT state -->
+      <div class="auth-buttons" id="authButtons">
+        <button class="btn btn-outline" onclick="openAuth('login')">Login</button>
+        <button class="btn btn-primary" onclick="openAuth('signup')">Sign Up</button>
+      </div>
+
+      <!-- Logged IN state -->
+      <div class="user-badge" id="userBadge" onclick="openCart()">
+        <span class="avatar" id="userAvatar">U</span>
+        <span id="userNameDisplay">User</span>
+        <span class="cart-pill" id="cartCount">0</span>
+      </div>
+      <button class="btn btn-outline btn-small hidden" id="logoutBtn" onclick="logout()">Logout</button>
+    </div>
+  </div>
+</header>
+
+<main class="container" id="home">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Fresh produce directly from farmers to your home</h1>
+      <p>KisanSetu · Direct, fair & transparent</p>
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Search vegetables, fruits, grains...">
+        <button onclick="doSearch()"><i class="fas fa-search"></i> Search</button>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card"><i class="fas fa-tractor"></i><h4>Direct from Farmers</h4></div>
+        <div class="feature-card"><i class="fas fa-rupee-sign"></i><h4>Fair Prices</h4></div>
+        <div class="feature-card"><i class="fas fa-handshake"></i><h4>No Middlemen</h4></div>
+        <div class="feature-card"><i class="fas fa-apple-alt"></i><h4>Fresh & Quality</h4></div>
+      </div>
+    </div>
+    <div style="background:#d4e8d4;border-radius:30px;padding:20px;min-width:140px;text-align:center;">
+      <i class="fas fa-seedling" style="font-size:4rem;color:#1e4a2b;"></i>
+      <p style="font-weight:600;margin-top:6px;">Bharat ki <br>Mandi</p>
+    </div>
+  </section>
+
+  <!-- PROBLEM & SOLUTION -->
+  <h2 class="section-title" id="about">Problem & Solution</h2>
+  <div class="problem-solution">
+    <div class="chain-box">
+      <h3>❌ Current chain</h3>
+      <div class="chain"><span>Farmer</span><i class="fas fa-arrow-right"></i><span>Trader</span><i class="fas fa-arrow-right"></i><span>Wholesaler</span><i class="fas fa-arrow-right"></i><span>Retailer</span><i class="fas fa-arrow-right"></i><span>Consumer</span></div>
+      <p style="margin-top:12px;color:#2d5a2d;">Multiple intermediaries reduce farmers' earnings & increase consumer prices.</p>
+    </div>
+    <div class="chain-box">
+      <h3>✅ KisanSetu solution</h3>
+      <div class="chain" style="background:#d4f0d4;"><span>Farmer</span><i class="fas fa-arrow-right"></i><span style="background:var(--green-medium);color:#fff;">KisanSetu</span><i class="fas fa-arrow-right"></i><span>Consumer</span></div>
+      <p style="margin-top:12px;color:#1e4a2b;">Direct selling, fair pricing, transparency & better earnings.</p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <h2 class="section-title" id="how-it-works">How It Works</h2>
+  <div class="steps">
+    <div class="step"><div class="num">1</div><h4>Farmer Lists</h4><p>List products with price & quantity</p></div>
+    <div class="step"><div class="num">2</div><h4>Consumer Orders</h4><p>Browse & place order</p></div>
+    <div class="step"><div class="num">3</div><h4>Farmer Confirms</h4><p>Accept & prepare</p></div>
+    <div class="step"><div class="num">4</div><h4>Fast Delivery</h4><p>Direct to consumer</p></div>
+  </div>
+
+  <!-- MARKETPLACE -->
+  <h2 class="section-title" id="marketplace">Marketplace</h2>
+  <p class="section-sub" style="margin-bottom:12px;">
+    Fresh from the farm — <span id="resultCount">0</span> products available
+    <span id="farmerAddWrap" class="hidden" style="margin-left:12px;">
+      <button class="btn btn-primary btn-small" onclick="openAddProduct()"><i class="fas fa-plus"></i> Add Product</button>
+    </span>
+  </p>
+  <div class="product-grid" id="productGrid"></div>
+  <p id="noResults" class="hidden" style="text-align:center;padding:30px;color:#2d5a2d;">No products match your search.</p>
+
+  <!-- FARMER DASHBOARD -->
+  <h2 class="section-title">Farmer Dashboard</h2>
+  <div style="background:#fff;border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);">
+    <div style="display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+      <span style="background:#eaf3ea;padding:8px 16px;border-radius:40px;"><i class="fas fa-box"></i> Products: <span id="dashProducts">0</span></span>
+      <span style="background:#eaf3ea;padding:8px 16px;border-radius:40px;"><i class="fas fa-clipboard-list"></i> Orders: <span id="dashOrders">0</span></span>
+      <span style="background:#eaf3ea;padding:8px 16px;border-radius:40px;"><i class="fas fa-rupee-sign"></i> Earnings: ₹<span id="dashEarnings">0</span></span>
+      <span style="background:#eaf3ea;padding:8px 16px;border-radius:40px;"><i class="fas fa-star"></i> Rating: 4.8</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Order</th><th>Customer</th><th>Items</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody id="ordersTableBody">
+          <tr><td colspan="5" style="text-align:center;color:#6b7d6b;">No orders yet. Place one from the marketplace!</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <h2 class="section-title">Admin Dashboard</h2>
+  <div class="admin-panel">
+    <div class="admin-sidebar">
+      <a href="#"><i class="fas fa-chart-pie"></i> Dashboard</a>
+      <a href="#"><i class="fas fa-users"></i> Farmers</a>
+      <a href="#"><i class="fas fa-user"></i> Consumers</a>
+      <a href="#"><i class="fas fa-boxes"></i> Products</a>
+      <a href="#"><i class="fas fa-shopping-cart"></i> Orders</a>
+      <a href="#"><i class="fas fa-credit-card"></i> Transactions</a>
+      <a href="#" onclick="logout();return false;"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </div>
+    <div class="admin-content">
+      <div class="dash-grid">
+        <div class="dash-card"><strong>128</strong><br>Farmers</div>
+        <div class="dash-card"><strong>1.2k</strong><br>Consumers</div>
+        <div class="dash-card"><strong>340</strong><br>Products</div>
+        <div class="dash-card"><strong>87</strong><br>Orders</div>
+      </div>
+      <p style="background:#eaf3ea;padding:14px;border-radius:30px;">📈 Sales overview: +18% this week | Top: Tomato, Potato</p>
+    </div>
+  </div>
+
+  <!-- EXTRA FEATURES -->
+  <div class="extra-features">
+    <span class="extra-badge"><i class="fas fa-lock"></i> Secure Payments</span>
+    <span class="extra-badge"><i class="fas fa-star"></i> Ratings & Reviews</span>
+    <span class="extra-badge"><i class="fas fa-comment"></i> Chat Support</span>
+    <span class="extra-badge"><i class="fas fa-bell"></i> Notifications</span>
+    <span class="extra-badge"><i class="fas fa-language"></i> Multi-language</span>
+    <span class="extra-badge"><i class="fas fa-chart-line"></i> Analytics</span>
+  </div>
+
+  <!-- CART SUMMARY -->
+  <div style="display:flex;flex-wrap:wrap;gap:20px;background:#fff;padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);margin:20px 0;">
+    <div style="flex:1;min-width:180px;">
+      <h4><i class="fas fa-shopping-cart"></i> Cart</h4>
+      <div id="miniCartItems" style="font-size:0.9rem;color:#2d5a2d;margin:8px 0;">Your cart is empty</div>
+      <p><strong>Total: ₹<span id="miniCartTotal">0</span></strong> + delivery ₹20</p>
+      <button class="btn btn-primary btn-block" onclick="openCart()">View Cart & Order</button>
+      <p style="font-size:0.8rem;margin-top:6px;">Cash on Delivery · UPI · Card</p>
+    </div>
+    <div style="flex:1;min-width:180px;">
+      <h4><i class="fas fa-truck"></i> Latest Order Status</h4>
+      <div id="trackingArea"><span class="badge">No active order</span></div>
+      <p style="margin-top:8px;" id="trackingDetail">Place an order to see tracking.</p>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer" id="contact">
+  <div class="container" style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:20px;">
+    <div><strong>KisanSetu</strong> · Farmer to Consumer</div>
+    <div class="footer-links">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="mailto:hello@kisansetu.in">hello@kisansetu.in</a>
+      <a href="tel:+911800123456">1800-123-456</a>
+    </div>
+    <div>© 2026 · KisanSetu · Prototype</div>
+  </div>
+</footer>
+
+<!-- ===================== AUTH MODAL ===================== -->
+<div class="modal-overlay" id="authModal">
+  <div class="modal" style="max-width:420px;">
+    <h3 id="authTitle">Login to KisanSetu</h3>
+    <form id="authForm" onsubmit="handleAuth(event)">
+      <div class="form-group" id="nameGroup" style="display:none;">
+        <label>Full Name</label>
+        <input type="text" id="authName" placeholder="e.g. Priya Sharma">
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="authEmail" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="authPassword" placeholder="Minimum 6 characters" required minlength="6">
+      </div>
+      <div class="form-group" id="roleGroup" style="display:none;">
+        <label>I am a</label>
+        <select id="authRole">
+          <option value="consumer">Consumer (Buyer)</option>
+          <option value="farmer">Farmer (Seller)</option>
+        </select>
+      </div>
+      <p class="error-msg" id="authError"></p>
+      <button type="submit" class="btn btn-primary btn-block" id="authSubmit">Login</button>
+    </form>
+    <p class="form-switch" id="authSwitch">
+      New here? <a onclick="switchAuthMode()">Create an account</a>
+    </p>
+  </div>
+</div>
+
+<!-- ===================== CART MODAL ===================== -->
+<div class="modal-overlay" id="cartModal">
+  <div class="modal">
+    <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+    <div id="cartItemsList"></div>
+    <div class="cart-total">Total: ₹<span id="cartTotal">0</span> <span style="font-size:0.8rem;font-weight:400;color:#2d5a2d;">+ ₹20 delivery</span></div>
+    <div class="form-group">
+      <label>Delivery Address</label>
+      <textarea id="deliveryAddress" rows="2" placeholder="House no., street, city, PIN code"></textarea>
+    </div>
+    <p class="error-msg" id="cartError"></p>
+    <div class="modal-actions">
+      <button class="btn btn-outline" onclick="closeCart()">Continue Shopping</button>
+      <button class="btn btn-primary" onclick="placeOrder()">Confirm Order</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ADD PRODUCT MODAL ===================== -->
+<div class="modal-overlay" id="addProductModal">
+  <div class="modal" style="max-width:480px;">
+    <h3><i class="fas fa-plus-circle"></i> List a New Product</h3>
+    <form onsubmit="addProduct(event)">
+      <div class="form-group">
+        <label>Product Name</label>
+        <input type="text" id="newName" placeholder="e.g. Fresh Tomato" required>
+      </div>
+      <div class="form-group">
+        <label>Emoji / Icon</label>
+        <input type="text" id="newEmoji" placeholder="🍅" maxlength="4" value="🥕">
+      </div>
+      <div class="form-group">
+        <label>Price (₹ per unit)</label>
+        <input type="number" id="newPrice" min="1" required placeholder="25">
+      </div>
+      <div class="form-group">
+        <label>Unit</label>
+        <select id="newUnit">
+          <option value="kg">kg</option>
+          <option value="bunch">bunch</option>
+          <option value="dozen">dozen</option>
+          <option value="piece">piece</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Available Quantity</label>
+        <input type="number" id="newQty" min="1" required placeholder="100">
+      </div>
+      <p class="error-msg" id="addProductError"></p>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" onclick="closeAddProduct()">Cancel</button>
+        <button type="submit" class="btn btn-primary">List Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+/* ============================================================
+   STATE
+============================================================ */
+const STORAGE_USERS = 'kisansetu_users';
+const STORAGE_SESSION = 'kisansetu_session';
+const STORAGE_PRODUCTS = 'kisansetu_products';
+const STORAGE_ORDERS = 'kisansetu_orders';
+
+let users = JSON.parse(localStorage.getItem(STORAGE_USERS) || '[]');
+let products = JSON.parse(localStorage.getItem(STORAGE_PRODUCTS) || 'null');
+let orders = JSON.parse(localStorage.getItem(STORAGE_ORDERS) || '[]');
+let currentUser = JSON.parse(localStorage.getItem(STORAGE_SESSION) || 'null');
+let cart = [];               // [{productId, qty}]
+let authMode = 'login';      // 'login' | 'signup'
+let searchQuery = '';
+
+/* Seed default products if none exist */
+if (!products) {
+  products = [
+    { id: 1, name: 'Tomato',        price: 25, unit: '
